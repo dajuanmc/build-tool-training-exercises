@@ -15,6 +15,11 @@ dependencies {
     implementation("com.google.guava:guava:31.1-jre")
 }
 
+tasks.register<Copy>("generateMlCode") {
+	from(layout.projectDirectory.dir("../mlCodeGenTemplate"))
+	into(layout.buildDirectory.dir("generated/sources/mlCode"))
+}
+
 tasks.register("sourceSetsInfo") {
     doLast {
         val projectPath = layout.projectDirectory.asFile.toPath()
@@ -61,3 +66,4 @@ tasks.named<Jar>("jar") {
         manifest.attributes["Main-Class"] = "com.gradle.lab.App"
     }
 }
+
